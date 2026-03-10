@@ -59,6 +59,7 @@ export class GitHubService {
             language: repo.language,
             stars: repo.stargazers_count,
             forks: repo.forks_count,
+            totalIssues: repo.open_issues_count || 0,
             lastActivityAt: repo.pushed_at ? new Date(repo.pushed_at) : null,
             lastSyncAt: new Date(),
           },
@@ -67,11 +68,43 @@ export class GitHubService {
         syncedRepos.push(repository);
       }
 
+      await this.refreshRepositoryStats();
+
       console.log(`[GitHub Sync] Synced ${syncedRepos.length} repositories`);
       return syncedRepos;
     } catch (error) {
       console.error('[GitHub Sync] Error syncing repositories:', error);
       throw error;
+    }
+  }
+
+  private async refreshRepositoryStats() {
+    console.log(`[GitHub Sync] Refreshing repository stats for ${this.userId}`);
+
+    // 1. Get all activity counts grouped by repo and type
+    const activityCounts = await prisma.activityEvent.groupBy({
+      by: ['repositoryName', 'eventType'],
+      where: { userId: this.userId },
+      _count: true,
+    });
+
+    // 2. Update each repository with its aggregated totals
+    for (const item of activityCounts) {
+      if (!item.repositoryName) continue;
+
+      const dataToUpdate: any = {};
+      if (item.eventType === 'COMMIT') dataToUpdate.totalCommits = item._count;
+      if (item.eventType === 'PULL_REQUEST')
+        dataToUpdate.totalPullRequests = item._count;
+      if (item.eventType === 'ISSUE') dataToUpdate.totalIssues = item._count;
+
+      await prisma.repository.updateMany({
+        where: {
+          userId: this.userId,
+          name: item.repositoryName,
+        },
+        data: dataToUpdate,
+      });
     }
   }
 
