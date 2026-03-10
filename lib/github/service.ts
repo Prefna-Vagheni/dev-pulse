@@ -46,6 +46,9 @@ export class GitHubService {
             language: repo.language,
             stars: repo.stargazers_count,
             forks: repo.forks_count,
+            totalCommits: 0,
+            totalPullRequests: 0,
+            totalIssues: repo.open_issues_count || 0,
             lastActivityAt: repo.pushed_at ? new Date(repo.pushed_at) : null,
           },
           update: {

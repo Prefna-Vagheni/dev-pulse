@@ -150,6 +150,9 @@ model Repository {
   language       String?
   stars          Int      @default(0)
   forks          Int      @default(0)
+  totalCommits      Int      @default(0) @map("total_commits")
+  totalPullRequests Int      @default(0) @map("total_pull_requests")
+  totalIssues        Int      @default(0) @map("total_issues")
   
   // Activity tracking
   lastActivityAt DateTime? @map("last_activity_at")
