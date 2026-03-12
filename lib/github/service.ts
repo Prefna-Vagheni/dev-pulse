@@ -2,6 +2,7 @@
 import { prisma } from '@/lib/db';
 import { createGitHubClient } from './client';
 import { EventType, EventSource } from '@prisma/client';
+import { emitToUser } from '@/lib/websocket/server';
 
 export class GitHubService {
   private userId: string;
@@ -202,6 +203,14 @@ export class GitHubService {
           },
         });
 
+        emitToUser(this.userId, 'new-activity', {
+          id: Math.random().toString(), // or get ID from the created event
+          type: 'COMMIT',
+          repositoryName: commit.repository.name,
+          message: commit.commit.message,
+          timestamp: new Date().toISOString(),
+        });
+
         syncedCount++;
       }
 
@@ -271,6 +280,14 @@ export class GitHubService {
                 },
                 occurredAt: new Date(pr.created_at),
               },
+            });
+
+            emitToUser(this.userId, 'new-activity', {
+              id: Math.random().toString(),
+              type: 'PULL_REQUEST',
+              repositoryName: repoName,
+              message: pr.title,
+              timestamp: new Date().toISOString(),
             });
 
             syncedCount++;
@@ -348,6 +365,14 @@ export class GitHubService {
                 } as any, // Cast to any to satisfy Prisma's complex Json type
                 occurredAt: new Date(issue.created_at),
               },
+            });
+
+            emitToUser(this.userId, 'new-activity', {
+              id: Math.random().toString(),
+              type: 'ISSUE',
+              repositoryName: repoName,
+              message: issue.title,
+              timestamp: new Date().toISOString(),
             });
 
             syncedCount++;
