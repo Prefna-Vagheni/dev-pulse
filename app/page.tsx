@@ -1,12 +1,13 @@
-// app/page.tsx
+// app/page.jsx
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
+  ArrowRight,
   BarChart3,
-  Brain,
-  GitBranch,
-  Sparkles,
+  Code,
+  GitCommit,
+  Github,
   TrendingUp,
   Zap,
 } from 'lucide-react';
@@ -14,187 +15,245 @@ import { getSession } from '@/lib/auth-utils';
 import { redirect } from 'next/navigation';
 
 export default async function HomePage() {
-  // Redirect to dashboard if already logged in
   const session = await getSession();
   if (session) {
     redirect('/dashboard');
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-      {/* Header */}
-      <header className="border-b bg-white/50 backdrop-blur dark:bg-gray-900/50">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-2">
-            <BarChart3 className="h-6 w-6 text-blue-600" />
-            <span className="text-xl font-bold">DevPulse</span>
+    <div className="min-h-screen bg-[#050a08] text-emerald-50 selection:bg-[#d4af37] selection:text-black">
+      {/* Nav - Strict & Professional */}
+      <nav className="sticky top-0 z-50 border-b border-emerald-900/40 bg-[#050a08]/95 backdrop-blur-none">
+        <div className="container mx-auto flex h-16 items-center justify-between px-6">
+          <div className="flex items-center gap-3">
+            <div className="h-6 w-6 bg-emerald-500" />
+            <span className="text-lg font-bold tracking-widest uppercase text-emerald-500">
+              DevPulse
+            </span>
           </div>
           <Link href="/login">
-            <Button>Sign In</Button>
+            <Button className="rounded-none border border-emerald-500 bg-transparent text-emerald-400 hover:bg-emerald-500 hover:text-black transition-none px-6">
+              SIGN IN
+            </Button>
           </Link>
         </div>
-      </header>
+      </nav>
 
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
-            <Sparkles className="h-4 w-4" />
-            AI-Powered Analytics Platform
-          </div>
+      {/* Hero - Typography Centric */}
+      <section className="relative border-b border-emerald-900/40 px-6 py-24 md:py-32 overflow-hidden">
+        {/* Background Image - Right Side Editorial Style */}
+        <div className="absolute top-0 right-0 bottom-0 w-full md:w-1/2 z-0 hidden md:block">
+          {/* Masking gradients to blend the image into the deep emerald background */}
+          <div className="absolute inset-0 z-10 bg-linear-to-r from-[#050a08] via-[#050a08]/40 to-transparent" />
+          <div className="absolute inset-0 z-10 bg-linear-to-b from-[#050a08] via-transparent to-[#050a08]" />
 
-          <h1 className="mb-6 text-5xl font-bold tracking-tight sm:text-6xl">
-            Track Your Developer
-            <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              {' '}
-              Journey
-            </span>
-          </h1>
-
-          <p className="mb-8 text-xl text-gray-600 dark:text-gray-300">
-            Analyze your coding patterns, track productivity, and get AI-powered
-            insights to become a better developer.
-          </p>
-
-          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Link href="/login">
-              <Button size="lg" className="w-full sm:w-auto">
-                Get Started Free
-              </Button>
-            </Link>
-            <Button size="lg" variant="outline" className="w-full sm:w-auto">
-              View Demo
-            </Button>
-          </div>
-
-          <p className="mt-4 text-sm text-gray-500">
-            No credit card required • Free forever for personal use
-          </p>
-        </div>
-      </section>
-
-      {/* Features Grid */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold">
-            Everything you need to level up
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400">
-            Powerful features to help you understand and improve your
-            development workflow
-          </p>
+          {/* Recommendation: Use an architectural photo (concrete, steel, or blueprints).
+      Grayscale + Low Opacity + Mix Blend avoids the "AI glow" look.
+    */}
+          <img
+            src="./images/github.webp"
+            alt="Engineering context"
+            className="h-full w-full object-cover grayscale opacity-15 contrast-125 brightness-50 mix-blend-luminosity"
+          />
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <Card>
-            <CardContent className="p-6">
-              <div className="mb-4 inline-flex rounded-lg bg-blue-100 p-3 dark:bg-blue-900/30">
-                <TrendingUp className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">
-                Real-time Analytics
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Track commits, PRs, and coding time with beautiful, real-time
-                dashboards
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="mb-4 inline-flex rounded-lg bg-purple-100 p-3 dark:bg-purple-900/30">
-                <Brain className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">AI Insights</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Get personalized recommendations and pattern analysis powered by
-                Claude AI
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="mb-4 inline-flex rounded-lg bg-green-100 p-3 dark:bg-green-900/30">
-                <GitBranch className="h-6 w-6 text-green-600 dark:text-green-400" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">GitHub Integration</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Seamlessly sync your GitHub activity and repository data
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="mb-4 inline-flex rounded-lg bg-yellow-100 p-3 dark:bg-yellow-900/30">
-                <Zap className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">
-                Productivity Tracking
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Monitor coding time, identify patterns, and optimize your
-                workflow
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="mb-4 inline-flex rounded-lg bg-red-100 p-3 dark:bg-red-900/30">
-                <BarChart3 className="h-6 w-6 text-red-600 dark:text-red-400" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Beautiful Charts</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Visualize your data with interactive charts and timelines
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="mb-4 inline-flex rounded-lg bg-indigo-100 p-3 dark:bg-indigo-900/30">
-                <Sparkles className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Natural Language</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Ask questions about your activity in plain English
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="container mx-auto px-4 py-20">
-        <Card className="overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600">
-          <CardContent className="p-12 text-center text-white">
-            <h2 className="mb-4 text-3xl font-bold">Ready to level up?</h2>
-            <p className="mb-8 text-lg text-blue-50">
-              Join developers who are already tracking their progress
-            </p>
-            <Link href="/login">
-              <Button size="lg" variant="secondary">
-                Start Free Today
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <div className="flex items-center gap-2">
-              <BarChart3 className="h-5 w-5 text-blue-600" />
-              <span className="font-semibold">DevPulse</span>
+        <div className="container relative mx-auto max-w-6xl z-10">
+          <div className="max-w-3xl">
+            {/* Badge - Engineering Focus */}
+            <div className="mb-6 inline-flex items-center gap-2 border border-emerald-500/30 px-4 py-1 text-[10px] font-bold uppercase tracking-[0.3em] text-[#d4af37]">
+              Engineering excellence in every commit
             </div>
-            <p className="text-sm text-gray-500">
-              © 2024 DevPulse. Built with ❤️ for developers.
+
+            {/* Heading - Serif Contrast */}
+            <h1 className="mb-8 text-6xl font-serif font-light leading-[1.1] tracking-tight md:text-7xl">
+              Stop guessing. <br />
+              <span className="italic text-emerald-500">Start tracking.</span>
+            </h1>
+
+            <p className="mb-10 max-w-xl text-lg leading-relaxed text-emerald-100/60">
+              Real insights into your coding habits. See your GitHub stats come
+              alive with charts, trends, and growth metrics that actually help
+              you improve.
             </p>
+
+            {/* CTA - Solid Blocks */}
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <Link href="/login">
+                <Button
+                  size="lg"
+                  className="rounded-none h-14 gap-4 bg-emerald-600 px-10 text-xs font-bold uppercase tracking-widest text-black hover:bg-[#d4af37] transition-colors"
+                >
+                  Start Integration
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+
+            <p className="mt-8 text-[10px] uppercase tracking-widest text-emerald-900">
+              Secure Auth · GitHub Sync · Zero Latency
+            </p>
+          </div>
+
+          {/* Dashboard Preview - Flat Engineering UI */}
+          <div className="mt-24">
+            <div className="relative mx-auto max-w-5xl border border-emerald-900/60 bg-[#0a110f]">
+              {/* Mock dashboard window controls */}
+              <div className="border-b border-emerald-900/60 bg-emerald-950/20 px-6 py-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex gap-2">
+                    <div className="h-2 w-2 rounded-full bg-emerald-900" />
+                    <div className="h-2 w-2 rounded-full bg-orange-700/50" />
+                    <div className="h-2 w-2 rounded-full bg-red-900/50" />
+                  </div>
+                  <div className="text-[10px] uppercase tracking-widest text-emerald-800">
+                    System_Monitor.exe
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-1 p-1 md:grid-cols-3 bg-emerald-900/20">
+                {[
+                  {
+                    label: 'Total Commits',
+                    value: '1,247',
+                    trend: '+12%',
+                    color: 'text-emerald-400',
+                  },
+                  {
+                    label: 'Active Hours',
+                    value: '84.5h',
+                    trend: 'Optimal',
+                    color: 'text-[#d4af37]',
+                  },
+                  {
+                    label: 'PR Efficiency',
+                    value: '94%',
+                    trend: '+24%',
+                    color: 'text-emerald-400',
+                  },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="bg-[#050a08] p-8 border border-emerald-900/20"
+                  >
+                    <div className="mb-4 text-[10px] font-bold uppercase tracking-widest text-emerald-700">
+                      {stat.label}
+                    </div>
+                    <div className="mb-2 text-4xl font-serif italic tracking-tighter">
+                      {stat.value}
+                    </div>
+                    <div
+                      className={`text-[10px] font-bold uppercase tracking-tighter ${stat.color}`}
+                    >
+                      {stat.trend} STAT_STABLE
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features - Structured Grid */}
+      <section className="px-6 py-24 border-b border-emerald-900/40">
+        <div className="container mx-auto max-w-6xl">
+          <div className="mb-20">
+            <h2 className="mb-4 text-4xl font-serif italic uppercase tracking-tighter">
+              Built for modern developers
+            </h2>
+            <p className="text-emerald-100/40 text-sm uppercase tracking-widest">
+              Features that help you understand your work, not just track it
+            </p>
+          </div>
+
+          <div className="grid gap-0 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-emerald-900/30">
+            {[
+              {
+                icon: <Github className="h-5 w-5" />,
+                title: 'GitHub Core',
+                desc: 'Connect once, sync forever. All your repos, commits, and PRs automatically tracked',
+              },
+              {
+                icon: <BarChart3 className="h-5 w-5" />,
+                title: 'Live Dashboards',
+                desc: 'Watch your stats update in real-time. Beautiful charts that make sense.',
+              },
+              {
+                icon: <TrendingUp className="h-5 w-5" />,
+                title: 'Growth Tracking',
+                desc: 'See your progress over time. Understand what makes you productive',
+              },
+              {
+                icon: <GitCommit className="h-5 w-5" />,
+                title: 'Activity Feed',
+                desc: 'Every commit, PR, and issue in one timeline. Never lose track.',
+              },
+              {
+                icon: <Code className="h-5 w-5" />,
+                title: 'Code Analysis',
+                desc: 'Which languages you use most. When you code best. All the patterns.',
+              },
+              {
+                icon: <Zap className="h-5 w-5" />,
+                title: 'Export Everything',
+                desc: 'Your data, your way. Export to CSV or JSON anytime.',
+              },
+            ].map((feature) => (
+              <div
+                key={feature.title}
+                className="group border-r border-b border-emerald-900/30 p-10 hover:bg-emerald-950/20 transition-colors"
+              >
+                <div className="mb-8 inline-flex h-10 w-10 items-center justify-center border border-emerald-500/30 text-emerald-500 group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                  {feature.icon}
+                </div>
+                <h3 className="mb-4 text-lg font-bold uppercase tracking-tight">
+                  {feature.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-emerald-100/40">
+                  {feature.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA - High Contrast Block */}
+      <section className="px-6 py-32">
+        <div className="container mx-auto max-w-4xl">
+          <div className="bg-emerald-600 p-1">
+            <div className="bg-[#050a08] px-12 py-20 text-center">
+              <h2 className="mb-6 text-4xl font-serif italic md:text-6xl">
+                Ready to sync?
+              </h2>
+              <p className="mb-10 text-emerald-100/40 uppercase tracking-[0.2em] text-xs">
+                Join hundreds of developers who already know their stats
+              </p>
+              <Link href="/login">
+                <Button
+                  size="lg"
+                  className="rounded-none h-14 bg-emerald-600 px-12 text-xs font-bold uppercase tracking-widest text-black hover:bg-white"
+                >
+                  Get started now
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer - Minimalist Identity */}
+      <footer className="border-t border-emerald-900/40 bg-[#050a08] py-12 px-6">
+        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <div className="h-4 w-4 bg-emerald-500" />
+            <span className="font-bold tracking-[0.3em] uppercase text-xs">
+              DevPulse
+            </span>
+          </div>
+          <div className="text-[10px] uppercase tracking-[0.4em] text-emerald-900">
+            Made for developers, by Prefna &copy;
           </div>
         </div>
       </footer>
