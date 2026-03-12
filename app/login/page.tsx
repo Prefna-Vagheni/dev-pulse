@@ -57,7 +57,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Background Effects */}
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-900/20 via-transparent to-transparent" />
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-cyan-900/20 via-transparent to-transparent" />
       <div className="fixed left-1/4 top-1/4 h-96 w-96 rounded-full bg-cyan-500/20 blur-[120px]" />
       <div className="fixed right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-blue-500/20 blur-[120px]" />
 
@@ -67,7 +67,7 @@ export default function LoginPage() {
           <div className="space-y-8 lg:pr-12">
             {/* Logo */}
             <div className="flex items-center gap-2">
-              <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600" />
+              <div className="h-10 w-10 rounded-lg bg-linear-to-br from-cyan-400 to-blue-600" />
               <span className="text-2xl font-semibold tracking-tight">
                 DevPulse
               </span>
@@ -78,7 +78,7 @@ export default function LoginPage() {
               <h1 className="mb-4 text-4xl font-bold leading-tight md:text-5xl">
                 Track your developer
                 <br />
-                <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
                   journey
                 </span>
               </h1>
@@ -91,7 +91,7 @@ export default function LoginPage() {
             {/* Features List */}
             <div className="space-y-4">
               <div className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-600/20">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-cyan-500/20 to-blue-600/20">
                   <TrendingUp className="h-5 w-5 text-cyan-400" />
                 </div>
                 <div>
@@ -103,7 +103,7 @@ export default function LoginPage() {
               </div>
 
               <div className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-600/20">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-purple-500/20 to-pink-600/20">
                   <Code2 className="h-5 w-5 text-purple-400" />
                 </div>
                 <div>
@@ -115,7 +115,7 @@ export default function LoginPage() {
               </div>
 
               <div className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500/20 to-red-600/20">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-orange-500/20 to-red-600/20">
                   <Activity className="h-5 w-5 text-orange-400" />
                 </div>
                 <div>
