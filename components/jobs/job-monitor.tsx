@@ -51,6 +51,14 @@ export function JobMonitor() {
   } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [autoRefresh, setAutoRefresh] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleManualRefresh = async () => {
+    setIsRefreshing(true);
+    await fetchStats();
+    // Brief delay so the user sees the spin
+    setTimeout(() => setIsRefreshing(false), 500);
+  };
 
   const fetchStats = async () => {
     try {
@@ -127,15 +135,35 @@ export function JobMonitor() {
         </div>
         <div className="flex items-center gap-2">
           <Button
-            variant="outline"
+            variant={autoRefresh ? 'default' : 'outline'}
             size="sm"
             onClick={() => setAutoRefresh(!autoRefresh)}
+            className="transition-all"
           >
-            {autoRefresh ? 'Pause' : 'Resume'} Auto-refresh
+            {/* {autoRefresh ? 'Pause' : 'Resume'} Auto-refresh */}
+            {autoRefresh ? (
+              <>
+                <Clock className="h-4 w-4 mr-2" />
+                Auto-refresh On
+              </>
+            ) : (
+              'Resume Auto-refresh'
+            )}
           </Button>
-          <Button variant="outline" size="sm" onClick={fetchStats}>
+          {/* <Button variant="outline" size="sm" onClick={fetchStats}>
             <RefreshCw className="h-4 w-4 mr-2" />
             Refresh
+          </Button> */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleManualRefresh}
+            disabled={isRefreshing}
+          >
+            <RefreshCw
+              className={`h-4 w-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`}
+            />
+            {isRefreshing ? 'Updating...' : 'Refresh'}
           </Button>
         </div>
       </div>
