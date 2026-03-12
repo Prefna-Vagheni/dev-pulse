@@ -16,28 +16,48 @@ export default function AnalyticsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [activities, setActivities] = useState<any[]>([]);
 
-  useEffect(() => {
-    fetchActivities();
-  }, []);
+  // useEffect(() => {
+  //   fetchActivities();
+  // }, []);
+  // useEffect(() => {
+  //   fetchData();
+  //   fetchActivities();
+  // }, [dateRange]);
 
   const fetchActivities = async () => {
     // const response = await fetch('/api/analytics/timeline?limit=1000');
     // const data = await response.json();
     // setActivities(data);
+    // setIsLoading(true);
 
     try {
-      const response = await fetch('/api/analytics/timeline?limit=1000');
+      const params = new URLSearchParams();
+      params.set('limit', '1000');
+
+      if (dateRange?.from) params.set('from', dateRange.from.toISOString());
+      if (dateRange?.to) params.set('to', dateRange.to.toISOString());
+      // params.set('limit', '1000');
+
+      // const response = await fetch('/api/analytics/timeline?limit=1000');
+      const response = await fetch(
+        `/api/analytics/timeline?${params.toString()}`,
+      );
       const result = await response.json();
       // Ensure we only set the state if the result is actually an array
-      setActivities(Array.isArray(result) ? result : []);
+      // setActivities(Array.isArray(result) ? result : []);
+      setActivities(Array.isArray(result.timeline) ? result.timeline : []);
     } catch (error) {
       console.error('Failed to fetch activities:', error);
       setActivities([]); // Fallback to empty array on network error
     }
+    // finally {
+    //   setIsLoading(false);
+    // }
   };
 
   useEffect(() => {
     fetchData();
+    fetchActivities();
   }, [dateRange]);
 
   const fetchData = async () => {

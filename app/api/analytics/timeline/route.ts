@@ -49,9 +49,15 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get('limit') || '50');
 
+    const fromParam = searchParams.get('from');
+    const toParam = searchParams.get('to');
+
+    const from = fromParam ? new Date(fromParam) : undefined;
+    const to = toParam ? new Date(toParam) : undefined;
+
     const analytics = createCachedAnalyticsService(session.user.id);
 
-    const data = await analytics.getActivityTimeline(limit);
+    const data = await analytics.getActivityTimeline(limit, from, to);
 
     const timeline = Array.isArray(data) ? data : [];
 

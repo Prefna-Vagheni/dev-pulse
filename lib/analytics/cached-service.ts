@@ -68,7 +68,7 @@ export class CachedAnalyticsService {
   /**
    * Get activity timeline with caching
    */
-  async getActivityTimeline(limit: number = 50) {
+  async getActivityTimeline(limit: number = 50, from?: Date, to?: Date) {
     const cacheKey = CacheKeys.userTimeline(this.userId, limit);
 
     return RedisCache.getOrSet(

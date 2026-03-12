@@ -278,9 +278,15 @@ export class AnalyticsService {
   /**
    * Get activity timeline (for timeline component)
    */
-  async getActivityTimeline(limit: number = 50) {
+  async getActivityTimeline(limit: number = 50, from?: Date, to?: Date) {
     const events = await prisma.activityEvent.findMany({
-      where: { userId: this.userId },
+      where: {
+        userId: this.userId,
+        occurredAt: {
+          gte: from,
+          lte: to,
+        },
+      },
       orderBy: { occurredAt: 'desc' },
       take: limit,
     });
