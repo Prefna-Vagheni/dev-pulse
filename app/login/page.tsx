@@ -69,7 +69,7 @@ export default function LoginPage() {
 
       <div className="relative w-full flex flex-col md:flex-row">
         {/* LEFT SIDE: BRANDING & BENEFITS */}
-        <div className="lg:w-1/2 p-8 lg:p-16 flex flex-col justify-between border-r border-emerald-900/20 bg-[#080808]">
+        <div className="md:w-1/2 p-8 md:p-16 flex flex-col justify-between border-r border-emerald-900/20 bg-[#080808]">
           <div className="z-10">
             <div className="flex items-center gap-2 mb-12">
               <Terminal className="text-emerald-500 w-5 h-5" />
@@ -78,7 +78,7 @@ export default function LoginPage() {
               </span>
             </div>
 
-            <h1 className="text-6xl lg:text-8xl font-black tracking-tighter leading-[0.8] mb-8">
+            <h1 className="text-6xl lg:text-7xl font-black tracking-tighter leading-[0.8] mb-8">
               YOUR STATS,
               <br />
               <span className="text-emerald-500 uppercase">BEAUTIFULLY</span>
@@ -204,7 +204,7 @@ export default function LoginPage() {
                       key={item}
                       className="flex items-center gap-3 text-[10px] uppercase text-zinc-500 tracking-tight"
                     >
-                      <div className="h-1 w-1 bg-emerald-500" />
+                      <Check className="h-3 w-3" />
                       {item}
                     </div>
                   ))}
