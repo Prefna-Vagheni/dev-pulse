@@ -10,6 +10,8 @@ A full-stack analytics platform that transforms your GitHub activity into action
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
 
 ![DevPulse Dashboard](./public/screenshot.png)
+![AI Insights](./public/ai-insights.png)
+![Charts](./public/charts.png)
 
 ## ✨ Features
 
@@ -94,7 +96,7 @@ A full-stack analytics platform that transforms your GitHub activity into action
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Prefna-Vagheni/dev-plus
+git clone https://github.com/Prefna-Vagheni/dev-pulse
 cd devpulse
 ```
 
@@ -191,33 +193,32 @@ REDIS_URL="redis://redis:6379"
 
 ```
 devpulse/
-├── src/
-│   ├── app/                      # Next.js App Router
-│   │   ├── api/                  # API routes
-│   │   │   ├── ai/              # AI insights endpoints
-│   │   │   ├── analytics/       # Analytics endpoints
-│   │   │   ├── auth/            # Authentication
-│   │   │   ├── export/          # Data export
-│   │   │   ├── github/          # GitHub sync
-│   │   │   └── graphql/         # GraphQL API
-│   │   ├── dashboard/           # Dashboard pages
-│   │   ├── login/               # Login page
-│   │   └── page.tsx             # Homepage
-│   ├── components/              # React components
-│   │   ├── ai/                  # AI-related components
-│   │   ├── analytics/           # Analytics components
-│   │   ├── charts/              # Chart components
-│   │   ├── github/              # GitHub components
-│   │   └── ui/                  # shadcn/ui components
-│   ├── lib/                     # Utility libraries
-│   │   ├── ai/                  # AI integration (Gemini)
-│   │   ├── analytics/           # Analytics service
-│   │   ├── auth/                # Authentication utilities
-│   │   ├── cache/               # Redis cache
-│   │   ├── github/              # GitHub API client
-│   │   ├── graphql/             # GraphQL schema & resolvers
-│   │   └── workers/             # Background jobs
-│   └── hooks/                   # React hooks
+├── app/                      # Next.js App Router
+│   ├── api/                  # API routes
+│   │   ├── ai/              # AI insights endpoints
+│   │   ├── analytics/       # Analytics endpoints
+│   │   ├── auth/            # Authentication
+│   │   ├── export/          # Data export
+│   │   ├── github/          # GitHub sync
+│   │   └── graphql/         # GraphQL API
+│   ├── dashboard/           # Dashboard pages
+│   ├── login/               # Login page
+│   └── page.tsx             # Homepage
+├── components/              # React components
+│   ├── ai/                  # AI-related components
+│   ├── analytics/           # Analytics components
+│   ├── charts/              # Chart components
+│   ├── github/              # GitHub components
+│   └── ui/                  # shadcn/ui components
+├── lib/                     # Utility libraries
+│   ├── ai/                  # AI integration (Gemini)
+│   ├── analytics/           # Analytics service
+│   ├── auth/                # Authentication utilities
+│   ├── cache/               # Redis cache
+│   ├── github/              # GitHub API client
+│   ├── graphql/             # GraphQL schema & resolvers
+│   └── workers/             # Background jobs
+└── hooks/                   # React hooks
 ├── prisma/
 │   ├── schema.prisma            # Database schema
 │   └── migrations/              # Database migrations
