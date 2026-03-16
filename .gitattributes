@@ -1,0 +1,13 @@
+# Ignore build and public assets
+dist/* linguist-vendored
+build/* linguist-vendored
+public/* linguist-vendored
+
+# Treat generated files as non-source
+*.html linguist-generated
+*.css linguist-generated
+
+
+# Explicitly mark TypeScript as the main language
+*.ts linguist-language=TypeScript
+*.tsx linguist-language=TypeScript

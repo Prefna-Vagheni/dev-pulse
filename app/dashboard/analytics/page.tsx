@@ -6,6 +6,7 @@ import { subDays } from 'date-fns';
 import { DateRangePicker } from '@/components/analytics/date-range-picker';
 import { ProductivityTrendsChart } from '@/components/charts/productivity-trend-chart';
 import { BestCodingTime } from '@/components/analytics/best-coding-time';
+import PageHeader from '@/components/ui/PageHeader';
 
 export default function AnalyticsPage() {
   const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -80,12 +81,11 @@ export default function AnalyticsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-3xl font-bold">Advanced Analytics</h2>
-          <p className="text-gray-500">
-            Deep dive into your productivity patterns
-          </p>
-        </div>
+        <PageHeader
+          title="Advanced Analytics"
+          paragraph="Deep dive into your productivity patterns"
+        />
+
         <DateRangePicker value={dateRange} onChange={setDateRange} />
       </div>
 

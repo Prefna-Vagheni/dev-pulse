@@ -97,7 +97,7 @@ A full-stack analytics platform that transforms your GitHub activity into action
 
 ```bash
 git clone https://github.com/Prefna-Vagheni/dev-pulse
-cd devpulse
+cd dev-pulse
 ```
 
 ### 2. Install dependencies
@@ -444,9 +444,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-Prefna Vagheni - [@prefnavagheni](https://twitter.com/prefnavagheni)
+Prefna Vagheni - [@prefnavagheni](https://x.com/PrefnaV)
 
-Project Link: [https://github.com/prefna-vagheni/devpulse](https://github.com/prefna-vagheni/devpulse)
+Project Link: [https://github.com/prefna-vagheni/devpulse](https://github.com/Prefna-Vagheni/dev-pulse)
 
 Live Demo: [https://dev-pulse-production.up.railway.app](https://dev-pulse-production.up.railway.app)
 

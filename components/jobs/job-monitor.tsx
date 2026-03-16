@@ -14,6 +14,93 @@ import { Progress } from '@/components/ui/progress';
 import { RefreshCw, CheckCircle2, XCircle, Clock, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+const STATUS_CONFIG = {
+  completed: {
+    color: 'text-green-600 bg-green-50 dark:bg-green-900/20',
+    icon: CheckCircle2,
+  },
+  failed: { color: 'text-red-600 bg-red-50 dark:bg-red-900/20', icon: XCircle },
+  active: {
+    color: 'text-blue-600 bg-blue-50 dark:bg-blue-900/20',
+    icon: Loader2,
+    animate: true,
+  },
+  waiting: {
+    color: 'text-yellow-600 bg-yellow-50 dark:bg-yellow-900/20',
+    icon: Clock,
+  },
+  delayed: {
+    color: 'text-yellow-600 bg-yellow-50 dark:bg-yellow-900/20',
+    icon: Clock,
+  },
+};
+
+const JobItem = ({ job }) => {
+  const config = STATUS_CONFIG[job.state] || {
+    color: 'text-gray-600 bg-gray-50',
+    icon: null,
+  };
+  const Icon = config.icon;
+
+  return (
+    <div className="flex items-center justify-between rounded-lg border p-4">
+      <div className="flex-1 space-y-1">
+        <div className="flex items-center gap-2">
+          <Badge className={config.color}>
+            {Icon && (
+              <Icon
+                className={`h-4 w-4 ${config.animate ? 'animate-spin' : ''}`}
+              />
+            )}
+            <span className="ml-1 capitalize">{job.state}</span>
+          </Badge>
+          <span className="font-medium">{job.name}</span>
+        </div>
+        <p className="text-sm text-gray-500">
+          User ID: {job.data?.userId?.slice(0, 8)}...
+        </p>
+        {job.state === 'active' && job.progress !== null && (
+          <Progress value={job.progress} className="h-2" />
+        )}
+        {job.failedReason && (
+          <p className="text-sm text-red-600">{job.failedReason}</p>
+        )}
+      </div>
+      <div className="text-right text-sm text-gray-500">
+        {new Date(job.finishedOn || job.timestamp).toLocaleTimeString()}
+      </div>
+    </div>
+  );
+};
+
+const MetricCard = ({ title, description, metrics }) => (
+  <Card>
+    <CardHeader>
+      <CardTitle>{title}</CardTitle>
+      <CardDescription>{description}</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <div className="grid grid-cols-2 gap-4">
+        {[
+          { label: 'Waiting', value: metrics?.waiting, color: '' },
+          { label: 'Active', value: metrics?.active, color: 'text-blue-600' },
+          {
+            label: 'Completed',
+            value: metrics?.completed,
+            color: 'text-green-600',
+          },
+          { label: 'Failed', value: metrics?.failed, color: 'text-red-600' },
+        ].map((m) => (
+          <div key={m.label} className="space-y-1">
+            <p className="text-sm text-gray-500">{m.label}</p>
+            <p className={`text-2xl font-bold ${m.color}`}>{m.value || 0}</p>
+          </div>
+        ))}
+      </div>
+    </CardContent>
+  </Card>
+);
+
 interface QueueMetrics {
   waiting: number;
   active: number;

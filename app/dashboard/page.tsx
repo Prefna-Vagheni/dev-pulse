@@ -364,6 +364,8 @@ import { ActivityTimeline } from '@/components/analytics/activity-timeline';
 import { RealtimeActivityUpdates } from '@/components/realtime/activity-updates';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ExportData } from '@/components/analytics/export-data';
+import { LogoutButton } from '@/components/auth/logout-button';
+import PageHeader from '@/components/ui/PageHeader';
 
 export default function DashboardPage() {
   const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -437,14 +439,13 @@ export default function DashboardPage() {
     <div className="space-y-6">
       {/* Header with Date Range Picker */}
       <div className="flex items-center justify-between flex-wrap gap-4">
-        <div>
-          <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-          <p className="text-gray-500 dark:text-gray-400">
-            Your development activity summary
-          </p>
-        </div>
+        <PageHeader
+          title="Dashboard"
+          paragraph="Your development activity summary"
+        />
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
+          <LogoutButton />
           <DateRangePicker value={dateRange} onChange={setDateRange} />
           <GitHubSyncButton onSyncComplete={fetchAnalytics} />
           <ExportData

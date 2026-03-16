@@ -22,6 +22,7 @@ import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import PageHeader from '@/components/ui/PageHeader';
 
 export default async function SettingsPage() {
   const session = await getSession();
@@ -29,12 +30,10 @@ export default async function SettingsPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-3xl font-bold tracking-tight">Settings</h2>
-        <p className="text-gray-500 dark:text-gray-400">
-          Manage your account settings and preferences
-        </p>
-      </div>
+      <PageHeader
+        title="Settings"
+        paragraph="Manage your account settings and preferences"
+      />
 
       <Tabs defaultValue="profile" className="space-y-6">
         <TabsList>
