@@ -5,7 +5,10 @@ public/* linguist-vendored
 
 # Treat generated files as non-source
 *.html linguist-generated
-*.css linguist-generated
+# *.json linguist-generated
+*.xml linguist-generated
+*.log linguist-generated
+
 
 
 # Explicitly mark TypeScript as the main language
